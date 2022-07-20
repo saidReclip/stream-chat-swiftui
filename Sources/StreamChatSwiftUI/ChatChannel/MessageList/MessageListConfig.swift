@@ -74,17 +74,18 @@ public enum DateIndicatorPlacement {
 /// Used to show and hide different helper views around the message.
 public struct MessageDisplayOptions {
         
-    let showAvatars: Bool
-    let showMessageDate: Bool
-    let showAuthorName: Bool
-    let animateChanges: Bool
-    let dateLabelSize: CGFloat
-    let lastInGroupHeaderSize: CGFloat
-    let minimumSwipeGestureDistance: CGFloat
-    let currentUserMessageTransition: AnyTransition
-    let otherUserMessageTransition: AnyTransition
-    let shouldAnimateReactions: Bool
-    var messageLinkDisplayResolver: (ChatMessage) -> [NSAttributedString.Key: Any]
+    public let showAvatars: Bool
+    public let showMessageDate: Bool
+    public let showAuthorName: Bool
+    public let animateChanges: Bool
+    public let dateLabelSize: CGFloat
+    public let lastInGroupHeaderSize: CGFloat
+    public let minimumSwipeGestureDistance: CGFloat
+    public let currentUserMessageTransition: AnyTransition
+    public let otherUserMessageTransition: AnyTransition
+    public let shouldAnimateReactions: Bool
+    public let messageLinkDisplayResolver: (ChatMessage) -> [NSAttributedString.Key: Any]
+    public let spacerWidth: (CGFloat) -> CGFloat
     
     public init(
         showAvatars: Bool = true,
@@ -98,7 +99,8 @@ public struct MessageDisplayOptions {
         otherUserMessageTransition: AnyTransition = .identity,
         shouldAnimateReactions: Bool = true,
         messageLinkDisplayResolver: @escaping (ChatMessage) -> [NSAttributedString.Key: Any] = MessageDisplayOptions
-            .defaultLinkDisplay
+            .defaultLinkDisplay,
+        spacerWidth: @escaping (CGFloat) -> CGFloat = MessageDisplayOptions.defaultSpacerWidth
     ) {
         self.showAvatars = showAvatars
         self.showAuthorName = showAuthorName
@@ -111,6 +113,7 @@ public struct MessageDisplayOptions {
         self.messageLinkDisplayResolver = messageLinkDisplayResolver
         self.lastInGroupHeaderSize = lastInGroupHeaderSize
         self.shouldAnimateReactions = shouldAnimateReactions
+        self.spacerWidth = spacerWidth
     }
     
     public static var defaultLinkDisplay: (ChatMessage) -> [NSAttributedString.Key: Any] {
@@ -118,6 +121,16 @@ public struct MessageDisplayOptions {
             [
                 NSAttributedString.Key.foregroundColor: UIColor(InjectedValues[\.colors].tintColor)
             ]
+        }
+    }
+    
+    public static var defaultSpacerWidth: (CGFloat) -> (CGFloat) {
+        { availableWidth in
+            if isIPad {
+                return 2 * availableWidth / 3
+            } else {
+                return availableWidth / 4
+            }
         }
     }
 }

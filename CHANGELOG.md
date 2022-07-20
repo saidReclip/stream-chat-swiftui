@@ -3,7 +3,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 # Upcoming
 
+### ✅ Added
+- Customizing padding for message bubble modifier
+- Customizing padding for message text view
+- Possibility to control tab bar visibility
+- Configuration of message size via spacing
+
+### 🐞 Fixed
+- Fixed a bug with canceled backswipe
+
 ### 🔄 Changed
+- Docs restructuring
+- Exposed some view components as public
 
 # [4.18.0](https://github.com/GetStream/stream-chat-swiftui/releases/tag/4.18.0)
 _July 05, 2022_
