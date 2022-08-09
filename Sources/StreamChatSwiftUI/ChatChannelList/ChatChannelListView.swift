@@ -51,11 +51,28 @@ public struct ChatChannelListView<Factory: ViewFactory>: View {
                 } else if viewModel.channels.isEmpty {
                     viewFactory.makeNoChannelsView()
                 } else {
-                    ChatChannelListContentView(
-                        viewFactory: viewFactory,
-                        viewModel: viewModel,
-                        onItemTap: onItemTap
-                    )
+                    ZStack {
+                        NavigationLink(isActive: Binding {
+                            viewModel.selectedChannel != nil
+                        } set: {
+                            newValue in
+                            viewModel.selectedChannel = nil
+                        }) {
+                            if let channel = viewModel.selectedChannel?.channel {
+                                LazyView(viewFactory.makeChannelDestination()(channel.channelSelectionInfo))
+                            } else {
+                                EmptyView()
+                            }
+                        } label: {
+                            EmptyView()
+                        }
+
+                        ChatChannelListContentView(
+                            viewFactory: viewFactory,
+                            viewModel: viewModel,
+                            onItemTap: onItemTap
+                        )
+                    }
                 }
             }
             .onDisappear(perform: {
