@@ -3,6 +3,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 # Upcoming
 
+### 🔄 Changed
+
+# [4.20.0](https://github.com/GetStream/stream-chat-swiftui/releases/tag/4.20.0)
+_August 04, 2022_
+
+### ✅ Added
+- Exposed a way to customise text message before sending and reading
+
+### 🐞 Fixed
+- Fixed a bug with channel list refreshing after deeplinking
+- Navigation bar iPad resizing issue
+- Fixed a bug with thread with custom attachments dismissed
+- Fixed Xcode 14 beta build issues
+
+### 🔄 Changed
+- Docs restructuring
+- Exposed some view components as public
+
+# [4.19.0](https://github.com/GetStream/stream-chat-swiftui/releases/tag/4.19.0)
+_July 21, 2022_
+
 ### ✅ Added
 - Customizing padding for message bubble modifier
 - Customizing padding for message text view
@@ -11,6 +32,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### 🐞 Fixed
 - Fixed a bug with canceled backswipe
+- Fixed a bug with channel pop on name editing
 
 ### 🔄 Changed
 - Docs restructuring

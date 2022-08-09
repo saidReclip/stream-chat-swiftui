@@ -66,11 +66,6 @@ public struct ChatChannelListView<Factory: ViewFactory>: View {
                         } label: {
                             EmptyView()
                         }
-
-                        ChannelDeepLink(
-                            deeplinkChannel: $viewModel.deeplinkChannel,
-                            channelDestination: viewFactory.makeChannelDestination()
-                        )
                         
                         ChatChannelListContentView(
                             viewFactory: viewFactory,
@@ -78,11 +73,6 @@ public struct ChatChannelListView<Factory: ViewFactory>: View {
                             onItemTap: onItemTap
                         )
                     }
-                }
-            }
-            .onDisappear(perform: {
-                if viewModel.selectedChannel != nil {
-                    viewModel.hideTabBar = true
                 }
                 if viewModel.swipedChannelId != nil {
                     viewModel.swipedChannelId = nil

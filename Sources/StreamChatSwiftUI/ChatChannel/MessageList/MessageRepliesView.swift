@@ -5,9 +5,14 @@
 import StreamChat
 import SwiftUI
 
+enum MessageRepliesConstants {
+    static let selectedMessageThread = "selectedMessageThread"
+    static let selectedMessage = "selectedMessage"
+}
+
 /// View shown below a message, when there are replies to it.
-struct MessageRepliesView<Factory: ViewFactory>: View {
-    
+public struct MessageRepliesView<Factory: ViewFactory>: View {
+        
     @Injected(\.fonts) private var fonts
     @Injected(\.colors) private var colors
     
@@ -16,14 +21,22 @@ struct MessageRepliesView<Factory: ViewFactory>: View {
     var message: ChatMessage
     var replyCount: Int
     
-    var threadDestination: Factory.MessageThreadDestination {
-        let threadDestination = factory.makeMessageThreadDestination()
-        return threadDestination(channel, message)
+    public init(factory: Factory, channel: ChatChannel, message: ChatMessage, replyCount: Int) {
+        self.factory = factory
+        self.channel = channel
+        self.message = message
+        self.replyCount = replyCount
     }
     
-    var body: some View {
-        NavigationLink {
-            LazyView(threadDestination)
+    public var body: some View {
+        Button {
+            // NOTE: this is used to avoid breaking changes.
+            // Will be updated in a major release.
+            NotificationCenter.default.post(
+                name: NSNotification.Name(MessageRepliesConstants.selectedMessageThread),
+                object: nil,
+                userInfo: [MessageRepliesConstants.selectedMessage: message]
+            )
         } label: {
             HStack {
                 if !message.isSentByCurrentUser {

@@ -72,7 +72,7 @@ public struct ChannelSelectionInfo: Identifiable {
         if let message = message {
             id = "\(channel.cid.id)-\(message.id)"
         } else {
-            id = channel.name ?? channel.cid.id
+            id = channel.cid.id
         }
     }
 }
