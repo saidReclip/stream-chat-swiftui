@@ -52,6 +52,21 @@ public struct ChatChannelListView<Factory: ViewFactory>: View {
                     viewFactory.makeNoChannelsView()
                 } else {
                     ZStack {
+                        NavigationLink(isActive: Binding {
+                            viewModel.selectedChannel != nil
+                        } set: {
+                            newValue in
+                            viewModel.selectedChannel = nil
+                        }) {
+                            if let channel = viewModel.selectedChannel?.channel {
+                                LazyView(viewFactory.makeChannelDestination()(channel.channelSelectionInfo))
+                            } else {
+                                EmptyView()
+                            }
+                        } label: {
+                            EmptyView()
+                        }
+
                         ChannelDeepLink(
                             deeplinkChannel: $viewModel.deeplinkChannel,
                             channelDestination: viewFactory.makeChannelDestination()
