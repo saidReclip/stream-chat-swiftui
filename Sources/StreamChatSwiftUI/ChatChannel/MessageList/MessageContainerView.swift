@@ -127,7 +127,7 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
                             handleGestureForMessage(showsMessageActions: true)
                         }
                     })
-                    .offset(x: min(self.offsetX, maximumHorizontalSwipeDisplacement))
+                    .offset(x: utils.messageListConfig.messageDisplayOptions.swipeDirection == .leading ? min(self.offsetX, maximumHorizontalSwipeDisplacement) : max(self.offsetX, maximumHorizontalSwipeDisplacement))
                     .simultaneousGesture(
                         DragGesture(
                             minimumDistance: minimumSwipeDistance,
@@ -227,7 +227,8 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
     }
     
     private var maximumHorizontalSwipeDisplacement: CGFloat {
-        replyThreshold + 30
+        let sideFactor = utils.messageListConfig.messageDisplayOptions.swipeDirection.sideFactor
+        return sideFactor * (replyThreshold + 30)
     }
         
     private var isMessagePinned: Bool {
@@ -258,20 +259,20 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
     }
     
     private func dragChanged(to value: CGFloat) {
+        let sideFactor = utils.messageListConfig.messageDisplayOptions.swipeDirection.sideFactor
         let horizontalTranslation = value
-         
-        if horizontalTranslation < 0 {
-            // prevent swiping to right.
+
+        if (horizontalTranslation * sideFactor) < 0 {
             return
         }
-                 
-        if horizontalTranslation >= minimumSwipeDistance {
+
+        if (horizontalTranslation * sideFactor) >= minimumSwipeDistance {
             offsetX = horizontalTranslation
         } else {
             offsetX = 0
         }
-        
-        if offsetX > replyThreshold && quotedMessage != message {
+
+        if (offsetX * sideFactor) > replyThreshold && quotedMessage != message {
             triggerHapticFeedback(style: .medium)
             withAnimation {
                 quotedMessage = message

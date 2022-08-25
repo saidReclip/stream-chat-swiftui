@@ -82,6 +82,7 @@ public struct MessageDisplayOptions {
     public let dateLabelSize: CGFloat
     public let lastInGroupHeaderSize: CGFloat
     public let minimumSwipeGestureDistance: CGFloat
+    public let swipeDirection: SwipeDirection
     public let currentUserMessageTransition: AnyTransition
     public let otherUserMessageTransition: AnyTransition
     public let shouldAnimateReactions: Bool
@@ -97,6 +98,7 @@ public struct MessageDisplayOptions {
         overlayDateLabelSize: CGFloat = 40,
         lastInGroupHeaderSize: CGFloat = 0,
         minimumSwipeGestureDistance: CGFloat = 10,
+        swipeDirection: SwipeDirection = .leading,
         currentUserMessageTransition: AnyTransition = .identity,
         otherUserMessageTransition: AnyTransition = .identity,
         shouldAnimateReactions: Bool = true,
@@ -110,6 +112,7 @@ public struct MessageDisplayOptions {
         self.animateChanges = animateChanges
         dateLabelSize = overlayDateLabelSize
         self.minimumSwipeGestureDistance = minimumSwipeGestureDistance
+        self.swipeDirection = swipeDirection
         self.currentUserMessageTransition = currentUserMessageTransition
         self.otherUserMessageTransition = otherUserMessageTransition
         self.messageLinkDisplayResolver = messageLinkDisplayResolver
