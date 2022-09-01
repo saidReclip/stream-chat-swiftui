@@ -82,7 +82,7 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
                             reactionsShown: reactionsShown
                         )
                     }
-                    
+
                     MessageView(
                         factory: factory,
                         message: message,
@@ -103,7 +103,7 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
                                     }
                                 )
                                 : nil
-                            
+
                             message.localState == .sendingFailed ? SendFailureIndicator() : nil
                         }
                     )
@@ -142,11 +142,16 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
                                 width: value.location.x - value.startLocation.x,
                                 height: value.location.y - value.startLocation.y
                             )
-                            
+
                             if diff == .zero {
                                 gestureState = .zero
                             } else {
                                 gestureState = value.translation
+                            }
+
+                            if let swipeDeadSpaceWidth = messageListConfig.messageDisplayOptions.swipeDeadSpaceWidth,
+                               value.startLocation.x < swipeDeadSpaceWidth {
+                                gestureState = .zero
                             }
                         }
                     )
@@ -154,7 +159,7 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
                         if !channel.config.quotesEnabled {
                             return
                         }
-                        
+
                         if offset == .zero {
                             // gesture ended or cancelled
                             setOffsetX(value: 0)
@@ -164,7 +169,7 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
                     })
                     .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("MessageView")
-                    
+
                     if message.replyCount > 0 && !isInThread {
                         factory.makeMessageRepliesView(
                             channel: channel,

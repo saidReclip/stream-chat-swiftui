@@ -85,6 +85,7 @@ public struct MessageDisplayOptions {
     public let currentUserMessageTransition: AnyTransition
     public let otherUserMessageTransition: AnyTransition
     public let shouldAnimateReactions: Bool
+    public let swipeDeadSpaceWidth: CGFloat?
     public let messageLinkDisplayResolver: (ChatMessage) -> [NSAttributedString.Key: Any]
     public let spacerWidth: (CGFloat) -> CGFloat
     
@@ -100,6 +101,7 @@ public struct MessageDisplayOptions {
         currentUserMessageTransition: AnyTransition = .identity,
         otherUserMessageTransition: AnyTransition = .identity,
         shouldAnimateReactions: Bool = true,
+        swipeDeadSpaceWidth: CGFloat? = 30,
         messageLinkDisplayResolver: @escaping (ChatMessage) -> [NSAttributedString.Key: Any] = MessageDisplayOptions
             .defaultLinkDisplay,
         spacerWidth: @escaping (CGFloat) -> CGFloat = MessageDisplayOptions.defaultSpacerWidth
@@ -115,6 +117,7 @@ public struct MessageDisplayOptions {
         self.messageLinkDisplayResolver = messageLinkDisplayResolver
         self.lastInGroupHeaderSize = lastInGroupHeaderSize
         self.shouldAnimateReactions = shouldAnimateReactions
+        self.swipeDeadSpaceWidth = swipeDeadSpaceWidth
         self.spacerWidth = spacerWidth
         self.showAvatarsInGroups = showAvatarsInGroups ?? showAvatars
     }
