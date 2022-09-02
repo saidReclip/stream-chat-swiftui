@@ -432,7 +432,16 @@ extension ViewFactory {
     }
     
     public func makeMessageListDateIndicator(date: Date) -> some View {
-        DateIndicatorView(date: date)
+        HStack(spacing: 0) {
+            Color.black
+                 .frame(height: 0.5)
+             Text(DateFormatter.messageListDateOverlay.string(from: date))
+                 .foregroundColor(Color.black)
+                 .padding(.all, 8)
+            Color.black
+                 .frame(height: 0.5)
+         }
+         .padding(.horizontal, 16)
     }
     
     public func makeGiphyBadgeViewType(
