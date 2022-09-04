@@ -27,7 +27,7 @@ public class MessageCachingUtils {
         return userDisplayInfo.id
     }
     
-    public func authorName(for message: ChatMessage) -> String {
+    func authorName(for message: ChatMessage) -> String {
         if let userDisplayInfo = userDisplayInfo(for: message) {
             return userDisplayInfo.name
         }
@@ -45,7 +45,7 @@ public class MessageCachingUtils {
         return userDisplayInfo.imageURL
     }
     
-    func authorInfo(from message: ChatMessage) -> UserDisplayInfo {
+    public func authorInfo(from message: ChatMessage) -> UserDisplayInfo {
         if let userDisplayInfo = userDisplayInfo(for: message) {
             return userDisplayInfo
         }
