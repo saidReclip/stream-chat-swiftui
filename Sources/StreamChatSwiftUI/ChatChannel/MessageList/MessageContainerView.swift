@@ -311,12 +311,12 @@ public struct MessageContainerView<Factory: ViewFactory>: View {
     }
 }
 
-struct SendFailureIndicator: View {
+public struct SendFailureIndicator: View {
     
     @Injected(\.colors) private var colors
     @Injected(\.images) private var images
     
-    var body: some View {
+    public var body: some View {
         BottomRightView {
             Image(uiImage: images.messageListErrorIndicator)
                 .customizable()
