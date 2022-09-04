@@ -29,7 +29,7 @@ extension Alert {
     }
 }
 
-public extension View {
+extension View {
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.
@@ -42,7 +42,9 @@ public extension View {
             self
         }
     }
-    
+}
+
+public extension View {
     /// Method for making a haptic feedback.
     /// - Parameter style: feedback style
     func triggerHapticFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
