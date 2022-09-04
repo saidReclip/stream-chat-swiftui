@@ -24,7 +24,7 @@ public class Utils {
     public var composerConfig: ComposerConfig
     public var shouldSyncChannelControllerOnAppear: (ChatChannelController) -> Bool
     
-    var messageCachingUtils = MessageCachingUtils()
+    public var messageCachingUtils = MessageCachingUtils()
     var messageListDateUtils: MessageListDateUtils
     var channelControllerFactory = ChannelControllerFactory()
     

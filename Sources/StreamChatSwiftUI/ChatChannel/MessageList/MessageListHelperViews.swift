@@ -111,6 +111,10 @@ public struct MessageReadIndicatorView: View {
 /// Message spacer view, used for adding space depending on who sent the message..
 public struct MessageSpacer: View {
     var spacerWidth: CGFloat?
+
+    public init(spacerWidth: CGFloat? = nil) {
+        self.spacerWidth = spacerWidth
+    }
     
     public var body: some View {
         Spacer()

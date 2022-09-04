@@ -315,7 +315,9 @@ public struct SendFailureIndicator: View {
     
     @Injected(\.colors) private var colors
     @Injected(\.images) private var images
-    
+
+    public init() {}
+
     public var body: some View {
         BottomRightView {
             Image(uiImage: images.messageListErrorIndicator)
